@@ -1,0 +1,80 @@
+name: idealista
+description: A new Flutter project.
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.6 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.18.0
+
+
+  
+  cupertino_icons: ^1.0.2
+  google_fonts: ^6.2.0
+  get: ^4.6.5
+  geolocator: ^11.1.0
+  google_maps_flutter: ^2.5.3
+  google_places_flutter: ^2.0.8
+  google_maps_polyline: ^1.0.3
+  geocoding: ^3.0.0
+  carousel_slider: ^4.2.1
+  video_player: ^2.7.2
+  http: ^1.1.0
+  photo_view: ^0.15.0
+  chewie: ^1.7.5
+  firebase_auth: ^4.16.0
+  firebase_core: ^2.24.2
+  
+  google_sign_in: ^6.1.6
+  flutter_facebook_auth: ^7.0.1
+  permission_handler: ^11.0.1
+  flutter_launcher_icons: ^0.13.1
+  
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+
+
+  flutter_lints: ^2.0.0
+
+flutter_launcher_icons:
+    android: "launcher_icon"
+    ios: true
+    image_path: "assets/icon/myspacelogo.png"
+
+
+flutter:
+
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/l10n/
+  
+  
+
+ 
+
+  # fonts:
+  #   - family: VastShadow
+  #     fonts:
+  #       - asset: font/VastShadow-Regular.ttf
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: fonts/poppins/Poppins-Regular.ttf
+        - asset: fonts/poppins/Poppins-Medium.ttf
+        - asset: fonts/poppins/Poppins-SemiBold.ttf
+        - asset: fonts/poppins/Poppins-Bold.ttf
+    - family: Gabriela
+      fonts:
+        - asset: fonts/poppins/Gabriela-Regular.ttf
+ 
