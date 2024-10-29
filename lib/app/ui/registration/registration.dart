@@ -57,9 +57,9 @@ class _RegistrationState extends State<Registration> {
                   ],
                 ),
               ),
-              pageContainer("Profile Info"),
-              pageContainer("Aadhaar Detail"),
-              pageContainer("Bank Detail")
+              pageContainer("Profile Info", "profileInfo"),
+              pageContainer("Aadhaar Detail", "bankDetail"),
+              pageContainer("Bank Detail", "aadhaarDetail")
             ],
           ),
         ),
@@ -67,28 +67,31 @@ class _RegistrationState extends State<Registration> {
     );
   }
 
-  Widget pageContainer(String value) {
-    return Container(
-      margin: EdgeInsets.only(
-          left: SizeConfig.widthPercentage(3.5),
-          right: SizeConfig.widthPercentage(3.5),
-          top: SizeConfig.heightPercentage(2.5)),
-      padding: EdgeInsets.symmetric(
-          horizontal: SizeConfig.widthPercentage(3.5),
-          vertical: SizeConfig.heightPercentage(3)),
-      decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey.shade300),
-          borderRadius: const BorderRadius.all(Radius.circular(10))),
-      child: Row(
-        children: [
-          Expanded(
-              child: Text(
-            value,
-            style: FontConstant.styleMedium(
-                fontSize: 15, color: AddColor.blackColor),
-          )),
-          const Icon(Icons.arrow_forward)
-        ],
+  Widget pageContainer(String value, String move) {
+    return GestureDetector(
+      onTap: () => {Get.offAndToNamed("/${move}")},
+      child: Container(
+        margin: EdgeInsets.only(
+            left: SizeConfig.widthPercentage(3.5),
+            right: SizeConfig.widthPercentage(3.5),
+            top: SizeConfig.heightPercentage(2.5)),
+        padding: EdgeInsets.symmetric(
+            horizontal: SizeConfig.widthPercentage(3.5),
+            vertical: SizeConfig.heightPercentage(3)),
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey.shade300),
+            borderRadius: const BorderRadius.all(Radius.circular(10))),
+        child: Row(
+          children: [
+            Expanded(
+                child: Text(
+              value,
+              style: FontConstant.styleMedium(
+                  fontSize: 15, color: AddColor.blackColor),
+            )),
+            const Icon(Icons.arrow_forward)
+          ],
+        ),
       ),
     );
   }
