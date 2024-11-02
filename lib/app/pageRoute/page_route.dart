@@ -3,6 +3,7 @@ import 'package:idealista/app/ui/auth/login/login.dart';
 import 'package:idealista/app/ui/splash/splash.dart';
 import '../ui/registration/aadhaar_detail/aadhaar_detail.dart';
 import '../ui/registration/bank_detail/bank_detail.dart';
+import '../ui/registration/please_wait/please_wait.dart';
 import '../ui/registration/profile_info/profile_info.dart';
 import '../ui/registration/registration.dart';
 import '../ui/splash/start_splash.dart';
@@ -16,5 +17,6 @@ class PageRoutes {
     GetPage(name: '/profileInfo', page: () => const ProfileInfo()),
     GetPage(name: '/bankDetail', page: () => const BankDetail()),
     GetPage(name: '/aadhaarDetail', page: () => const AadhaarDetail()),
+    GetPage(name: '/pleaseWait', page: () => const PleaseWait()),
   ];
 }

@@ -42,8 +42,8 @@ class _RegistrationState extends State<Registration> {
                     )),
                     Container(
                       decoration: BoxDecoration(
-                          border:
-                              Border.all(color: AddColor.whiteColor, width: 2),
+                          border: Border.all(
+                              color: AddColor.whiteColor, width: 2),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(4))),
                       padding: EdgeInsets.symmetric(
@@ -58,8 +58,8 @@ class _RegistrationState extends State<Registration> {
                 ),
               ),
               pageContainer("Profile Info", "profileInfo"),
-              pageContainer("Aadhaar Detail", "bankDetail"),
-              pageContainer("Bank Detail", "aadhaarDetail")
+              pageContainer("Aadhaar Detail", "aadhaarDetail"),
+              pageContainer("Bank Detail", "bankDetail"),
             ],
           ),
         ),

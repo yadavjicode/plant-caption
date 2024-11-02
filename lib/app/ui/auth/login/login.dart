@@ -114,8 +114,8 @@ class _LoginState extends State<Login> {
                   child: CustomButton(
                     text: "Continue",
                     color: AddColor.primaryColor,
-                    textStyle: FontConstant.styleSemiBold(
-                      fontSize: 18,
+                    textStyle: FontConstant.styleRegular(
+                      fontSize: 16,
                       color: AddColor.whiteColor,
                     ),
                     onPressed: () {
@@ -168,7 +168,7 @@ class _LoginState extends State<Login> {
                     maxlength: 10,
                     controller: phoneno,
                     labelText: "Mobile No",
-                    hintText: "Mobile no",
+                    hintText: "Enter Mobile no",
                   )),
               const SizedBox(
                 height: 10,
@@ -177,8 +177,8 @@ class _LoginState extends State<Login> {
                   width: double.infinity,
                   child: CustomButton(
                       color: AddColor.primaryColor,
-                      textStyle: FontConstant.styleSemiBold(
-                          fontSize: 18, color: AddColor.whiteColor),
+                      textStyle: FontConstant.styleRegular(
+                          fontSize: 16, color: AddColor.whiteColor),
                       text: "Send OTP",
                       onPressed: () => {
                             if (phoneno.text.isEmpty)

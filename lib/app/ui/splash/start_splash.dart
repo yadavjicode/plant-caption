@@ -23,7 +23,7 @@ class _StartSplashState extends State<StartSplash> {
   // Define a list of text captions for each image
   final List<String> captions = [
     'Flexible Timing & Gardening Sevice.',
-    'Join & Earn up to 30000/month',
+    'Join & Earn up to ₹ 30000/month',
     'Join our Gardening App Today',
   ];
 
@@ -124,8 +124,8 @@ class _StartSplashState extends State<StartSplash> {
                         text: "Start Gardening",
                         onPressed: () => {Get.offAndToNamed("/login")},
                         color: AddColor.primaryColor,
-                        textStyle: FontConstant.styleSemiBold(
-                            fontSize: 18, color: AddColor.whiteColor)),
+                        textStyle: FontConstant.styleRegular(
+                            fontSize: 16, color: AddColor.whiteColor)),
                     SizedBox(
                       height: SizeConfig.heightPercentage(5),
                     )

@@ -43,7 +43,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                       height: SizeConfig.widthPercentage(40),
                       width: SizeConfig.widthPercentage(40),
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey.shade300),
+                          border: Border.all(color: Colors.grey.shade400),
                           borderRadius: BorderRadius.all(Radius.circular(10))),
                       child: Center(
                           child: Column(
@@ -55,8 +55,12 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text("Select Profile Image",style:  FontConstant.styleRegular(
-                                fontSize: 15, color: AddColor.blackColor),textAlign: TextAlign.center,),
+                            child: Text(
+                              "Select Profile Image",
+                              style: FontConstant.styleRegular(
+                                  fontSize: 15, color: AddColor.blackColor),
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                         ],
                       )),
@@ -66,10 +70,12 @@ class _ProfileInfoState extends State<ProfileInfo> {
                     ),
                     CustomTextField(
                       labelText: "First name",
+                      hintText: "Enter First name",
                     ),
                     SizedBox(height: SizeConfig.heightPercentage(2)),
                     CustomTextField(
                       labelText: "Last name",
+                      hintText: "Enter Last name",
                     ),
                     SizedBox(
                       height: SizeConfig.heightPercentage(3),
@@ -144,8 +150,8 @@ class _ProfileInfoState extends State<ProfileInfo> {
                     ),
                     CustomButton(
                         color: AddColor.primaryColor,
-                        textStyle: FontConstant.styleSemiBold(
-                            fontSize: 18, color: AddColor.whiteColor),
+                        textStyle: FontConstant.styleRegular(
+                            fontSize: 15, color: AddColor.whiteColor),
                         text: "Submit",
                         onPressed: () => {})
                   ],
