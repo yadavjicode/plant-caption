@@ -103,6 +103,7 @@ class _StartSplashState extends State<StartSplash> {
               const SizedBox(
                 height: 20,
               ),
+              
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Column(

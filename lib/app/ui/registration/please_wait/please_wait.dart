@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:idealista/app/const/addColor.dart';
 
 import '../../../const/font_constant.dart';
@@ -38,9 +39,14 @@ class _PleaseWaitState extends State<PleaseWait> {
                 decoration: BoxDecoration(
                     border: Border.all(color: AddColor.grey),
                     borderRadius: BorderRadius.all(Radius.circular(10))),
-                child: Image.asset(
-                  "assets/images/warning.png",
-                  height: SizeConfig.heightPercentage(25),
+                child: GestureDetector(
+                  onTap: () => {
+                    Get.offAndToNamed("/dashboard")
+                  },
+                  child: Image.asset(
+                    "assets/images/warning.png",
+                    height: SizeConfig.heightPercentage(25),
+                  ),
                 ),
               )
             ],

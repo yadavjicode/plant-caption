@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:idealista/app/ui/auth/login/login.dart';
+import 'package:idealista/app/ui/dashboard/dashboard.dart';
 import 'package:idealista/app/ui/splash/splash.dart';
 import '../ui/registration/aadhaar_detail/aadhaar_detail.dart';
 import '../ui/registration/bank_detail/bank_detail.dart';
@@ -18,5 +19,6 @@ class PageRoutes {
     GetPage(name: '/bankDetail', page: () => const BankDetail()),
     GetPage(name: '/aadhaarDetail', page: () => const AadhaarDetail()),
     GetPage(name: '/pleaseWait', page: () => const PleaseWait()),
+    GetPage(name: '/dashboard', page: () => const Dashboard()),
   ];
 }

@@ -69,7 +69,7 @@ class _RegistrationState extends State<Registration> {
 
   Widget pageContainer(String value, String move) {
     return GestureDetector(
-      onTap: () => {Get.offAndToNamed("/${move}")},
+      onTap: () => {Get.offAndToNamed("/$move")},
       child: Container(
         margin: EdgeInsets.only(
             left: SizeConfig.widthPercentage(3.5),
