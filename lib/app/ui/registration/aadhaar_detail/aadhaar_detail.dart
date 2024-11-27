@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:idealista/app/const/CustomTextFeild.dart';
-import 'package:idealista/app/const/font_constant.dart';
-import '../../../const/addColor.dart';
-import '../../../const/button_constant.dart';
+import 'package:idealista/app/widget/CustomTextFeild.dart';
+import 'package:idealista/app/widget/font_constant.dart';
+import '../../../constant/app_color.dart';
+import '../../../widget/button_constant.dart';
 import '../../widget/appbar.dart';
 import '../../../util/size.dart';
 
@@ -17,7 +17,7 @@ class _AadhaarDetailState extends State<AadhaarDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AddColor.whiteColor,
+        backgroundColor: AppColor.whiteColor,
         body: SafeArea(
           child: Column(
             children: [
@@ -49,15 +49,15 @@ class _AadhaarDetailState extends State<AadhaarDetail> {
                             child: Text(
                               "Eg. 1234 5678 6789",
                               style: FontConstant.styleRegular(
-                                  fontSize: 10, color: AddColor.darkgrey),
+                                  fontSize: 10, color: AppColor.darkgrey),
                             )),
                         SizedBox(
                           height: SizeConfig.heightPercentage(8),
                         ),
                         CustomButton(
-                            color: AddColor.primaryColor,
+                            color: AppColor.primaryColor,
                             textStyle: FontConstant.styleRegular(
-                                fontSize: 15, color: AddColor.whiteColor),
+                                fontSize: 15, color: AppColor.whiteColor),
                             text: "Submit",
                             onPressed: () => {})
                       ],
@@ -84,14 +84,14 @@ class _AadhaarDetailState extends State<AadhaarDetail> {
             Text(
               title,
               style: FontConstant.styleRegular(
-                  fontSize: 15, color: AddColor.darkgrey),
+                  fontSize: 15, color: AppColor.darkgrey),
             ),
             Spacer(),
             CustomButton(
                 radius: 5,
-                color: AddColor.primaryColor,
+                color: AppColor.primaryColor,
                 textStyle: FontConstant.styleRegular(
-                    fontSize: 15, color: AddColor.whiteColor),
+                    fontSize: 15, color: AppColor.whiteColor),
                 text: "Upload Photo",
                 onPressed: () => {})
           ],

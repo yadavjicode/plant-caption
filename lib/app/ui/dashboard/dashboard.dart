@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:idealista/app/const/addColor.dart';
+import 'package:idealista/app/constant/app_color.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -84,7 +84,7 @@ class _DashboardState extends State<Dashboard> {
                 child: Container(
                     padding: const EdgeInsets.all(15),
                     decoration: const BoxDecoration(
-                        color: AddColor.whiteColor, shape: BoxShape.circle),
+                        color: AppColor.whiteColor, shape: BoxShape.circle),
                     child: const Icon(Icons.location_searching)),
               ),
             )

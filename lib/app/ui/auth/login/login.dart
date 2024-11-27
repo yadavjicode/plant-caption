@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:idealista/app/const/CustomTextFeild.dart';
-import 'package:idealista/app/const/addColor.dart';
+import 'package:idealista/app/constant/app_color.dart';
+import 'package:idealista/app/controller/send_otp_controller.dart';
+import 'package:idealista/app/controller/verify_otp_controller.dart';
+import 'package:idealista/app/util/size.dart';
+import 'package:idealista/app/widget/CustomTextFeild.dart';
 import 'package:idealista/app/ui/widget/CustomSnackbar.dart';
 
-import '../../../const/button_constant.dart';
-import '../../../const/font_constant.dart';
+import '../../../widget/button_constant.dart';
+import '../../../widget/font_constant.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -15,7 +18,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  TextEditingController phoneno = TextEditingController();
+  final TextEditingController phoneno = TextEditingController();
   final TextEditingController _firstController = TextEditingController();
   final TextEditingController _secondController = TextEditingController();
   final TextEditingController _thirdController = TextEditingController();
@@ -29,6 +32,10 @@ class _LoginState extends State<Login> {
   final FocusNode _fourthFocusNode = FocusNode();
   final FocusNode _fifthFocusNode = FocusNode();
   final FocusNode _sixthFocusNode = FocusNode();
+
+  final SendOtpController sendOtpController = Get.put(SendOtpController());
+  final VerifyOtpController verifyOtpController =
+      Get.put(VerifyOtpController());
 
   @override
   void dispose() {
@@ -48,166 +55,110 @@ class _LoginState extends State<Login> {
     super.dispose();
   }
 
-  void _showBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled:
-          true, // Allow the bottom sheet to expand over the keyboard
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(15.0)),
-      ),
-      builder: (BuildContext context) {
-        return Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context)
-                .viewInsets
-                .bottom, // Padding to move content above keyboard
-            left: 20,
-            right: 20,
-            top: 20,
-          ),
-          child: SingleChildScrollView(
-            // Allows the bottom sheet to be scrolled if necessary
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                const Text(
-                  "Enter 6 Digit Code",
-                  style: TextStyle(fontSize: 25),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 20, bottom: 20),
-                  child: const Text(
-                    "Enter the 6-digit code received on\nyour mobile number",
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _firstOtpField(context),
-                    _buildOtpField(context, _secondController, _secondFocusNode,
-                        _thirdFocusNode),
-                    _buildOtpField(context, _thirdController, _thirdFocusNode,
-                        _fourthFocusNode),
-                    _buildOtpField(context, _fourthController, _fourthFocusNode,
-                        _fifthFocusNode),
-                    _buildOtpField(context, _fifthController, _fifthFocusNode,
-                        _sixthFocusNode),
-                    _lastOtpField(context),
-                  ],
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                  child: Text(
-                    "Resend otp",
-                    style: FontConstant.styleSemiBold(
-                        fontSize: 12, color: AddColor.darkgrey),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 20, bottom: 20),
-                  width: double.infinity,
-                  child: CustomButton(
-                    text: "Continue",
-                    color: AddColor.primaryColor,
-                    textStyle: FontConstant.styleRegular(
-                      fontSize: 16,
-                      color: AddColor.whiteColor,
-                    ),
-                    onPressed: () {
-                      if (_firstController.text.isNotEmpty &&
-                          _secondController.text.isNotEmpty &&
-                          _thirdController.text.isNotEmpty &&
-                          _fourthController.text.isNotEmpty &&
-                          _fifthController.text.isNotEmpty &&
-                          _sixthController.text.isNotEmpty) {
-                        Get.toNamed('/registration');
-                      } else {
-                        CustomSanckbar.showSnackbar(context, "Enter valid OTP");
-                      }
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AddColor.whiteColor,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 15),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                child: Image.asset("assets/images/logo.jpeg"),
+        backgroundColor: AppColor.whiteColor,
+        body: Obx(() {
+          return Stack(children: [
+            Center(
+              child: Image.asset(
+                "assets/images/background.png",
+                fit: BoxFit.cover,
+                height: double.infinity,
+                width: double.infinity,
               ),
-              Container(
-                margin: EdgeInsets.only(top: 20, bottom: 30),
-                child: Text(
-                  "Login or Create an Account",
-                  style: FontConstant.styleMedium(
-                      fontSize: 20, color: AddColor.blackColor),
+            ),
+            SingleChildScrollView(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 22, vertical: 15),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: SizeConfig.heightPercentage(10),
+                    ),
+                    Container(
+                      child: Image.asset(
+                        "assets/images/logo.png",
+                        width: SizeConfig.widthPercentage(80),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 20, bottom: 5),
+                      child: Text(
+                        "Hi User!",
+                        style: FontConstant.styleSemiBold(
+                            fontSize: 20, color: AppColor.blackColor),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(bottom: 30),
+                      child: Text(
+                        "Please  sign in your account.",
+                        style: FontConstant.styleRegular(
+                            fontSize: 14, color: AppColor.darkgrey),
+                      ),
+                    ),
+                    Container(
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        child: CustomTextField(
+                          keyboardType: TextInputType.number,
+                          maxlength: 10,
+                          controller: phoneno,
+                          labelText: "Mobile No",
+                          hintText: "Enter Mobile no",
+                        )),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    SizedBox(
+                        width: double.infinity,
+                        child: CustomButton(
+                            color: AppColor.primaryColor,
+                            textStyle: FontConstant.styleSemiBold(
+                                fontSize: 16, color: AppColor.whiteColor),
+                            text: "Send OTP",
+                            onPressed: () => {
+                                  if (phoneno.text.isEmpty)
+                                    {
+                                      CustomSanckbar.showSnackbar(
+                                          context, "Mobile no is empty", false)
+                                    }
+                                  else if (phoneno.text.length < 10)
+                                    {
+                                      CustomSanckbar.showSnackbar(context,
+                                          "Fill 10 digit mobile no", false)
+                                    }
+                                  else
+                                    {
+                                      sendOtpController.sendOtp(context,
+                                          phoneno.text.toString().trim()),
+                                      _showBottomSheet(context)
+                                    }
+                                })),
+                    Container(
+                      margin: EdgeInsets.only(top: 10),
+                      child: Text(
+                        "OTP will send on your mobile no which\nyou enter above",
+                        textAlign: TextAlign.center,
+                        style: FontConstant.styleRegular(
+                            fontSize: 12, color: AppColor.darkgrey),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              Container(
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  child: CustomTextField(
-                    keyboardType: TextInputType.number,
-                    maxlength: 10,
-                    controller: phoneno,
-                    labelText: "Mobile No",
-                    hintText: "Enter Mobile no",
-                  )),
-              const SizedBox(
-                height: 10,
-              ),
-              SizedBox(
-                  width: double.infinity,
-                  child: CustomButton(
-                      color: AddColor.primaryColor,
-                      textStyle: FontConstant.styleRegular(
-                          fontSize: 16, color: AddColor.whiteColor),
-                      text: "Send OTP",
-                      onPressed: () => {
-                            if (phoneno.text.isEmpty)
-                              {
-                                CustomSanckbar.showSnackbar(
-                                    context, "Mobile no is empty")
-                              }
-                            else if (phoneno.text.length < 10)
-                              {
-                                CustomSanckbar.showSnackbar(
-                                    context, "Fill 10 digit mobile no")
-                              }
-                            else
-                              {_showBottomSheet(context)}
-                          })),
-              Container(
-                margin: EdgeInsets.only(top: 10),
-                child: Text(
-                  "OTP will send on your mobile no which\nyou enter above",
-                  textAlign: TextAlign.center,
-                  style: FontConstant.styleRegular(
-                      fontSize: 12, color: AddColor.grey),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+            if (sendOtpController.isLoading.value ||
+                verifyOtpController.isLoading.value)
+              Center(
+                  child: const CircularProgressIndicator(
+                color: AppColor.primaryColor,
+              ))
+          ]);
+        }));
   }
 
   Widget _buildOtpField(BuildContext context, TextEditingController controller,
@@ -280,6 +231,102 @@ class _LoginState extends State<Login> {
           }
         },
       ),
+    );
+  }
+
+  void _showBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled:
+          true, // Allow the bottom sheet to expand over the keyboard
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(15.0)),
+      ),
+      builder: (BuildContext context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context)
+                .viewInsets
+                .bottom, // Padding to move content above keyboard
+            left: 20,
+            right: 20,
+            top: 20,
+          ),
+          child: SingleChildScrollView(
+            // Allows the bottom sheet to be scrolled if necessary
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const Text(
+                  "Enter 6 Digit Code",
+                  style: TextStyle(fontSize: 25),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 20, bottom: 20),
+                  child: const Text(
+                    "Enter the 6-digit code received on\nyour mobile number",
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _firstOtpField(context),
+                    _buildOtpField(context, _secondController, _secondFocusNode,
+                        _thirdFocusNode),
+                    _buildOtpField(context, _thirdController, _thirdFocusNode,
+                        _fourthFocusNode),
+                    _buildOtpField(context, _fourthController, _fourthFocusNode,
+                        _fifthFocusNode),
+                    _buildOtpField(context, _fifthController, _fifthFocusNode,
+                        _sixthFocusNode),
+                    _lastOtpField(context),
+                  ],
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+                  child: Text(
+                    "Resend otp",
+                    style: FontConstant.styleSemiBold(
+                        fontSize: 12, color: AppColor.darkgrey),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 20, bottom: 20),
+                  width: double.infinity,
+                  child: CustomButton(
+                    text: "Continue",
+                    color: AppColor.primaryColor,
+                    textStyle: FontConstant.styleSemiBold(
+                      fontSize: 16,
+                      color: AppColor.whiteColor,
+                    ),
+                    onPressed: () {
+                      if (_firstController.text.isNotEmpty &&
+                          _secondController.text.isNotEmpty &&
+                          _thirdController.text.isNotEmpty &&
+                          _fourthController.text.isNotEmpty &&
+                          _fifthController.text.isNotEmpty &&
+                          _sixthController.text.isNotEmpty) {
+                        String otp =
+                            "${_firstController.text.toString().trim()}${_secondController.text.toString().trim()}${_thirdController.text.toString().trim()}${_fourthController.text.toString().trim()}${_fifthController.text.toString().trim()}${_sixthController.text.toString().trim()}";
+                        verifyOtpController.verifyOtp(
+                            context, phoneno.text.toString().trim(), otp);
+                      } else {
+                        CustomSanckbar.showSnackbar(
+                            context, "Enter valid OTP", false);
+                      }
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

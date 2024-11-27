@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:idealista/app/const/CustomTextFeild.dart';
+import 'package:idealista/app/widget/CustomTextFeild.dart';
 
-import '../../../const/addColor.dart';
-import '../../../const/button_constant.dart';
-import '../../../const/font_constant.dart';
+import '../../../constant/app_color.dart';
+import '../../../widget/button_constant.dart';
+import '../../../widget/font_constant.dart';
 import '../../../util/size.dart';
 import '../../widget/appbar.dart';
 
@@ -19,7 +19,7 @@ class _BankDetailState extends State<BankDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AddColor.whiteColor,
+        backgroundColor: AppColor.whiteColor,
         body: SafeArea(
           child: Column(
             children: [
@@ -37,7 +37,7 @@ class _BankDetailState extends State<BankDetail> {
                             child: Text(
                               "Provide your bank details",
                               style: FontConstant.styleSemiBold(
-                                  fontSize: 17, color: AddColor.blackColor),
+                                  fontSize: 17, color: AppColor.blackColor),
                             )),
                         SizedBox(
                           height: SizeConfig.heightPercentage(2),
@@ -75,7 +75,7 @@ class _BankDetailState extends State<BankDetail> {
                             child: Text(
                               "Eg. ABCD000123  you can find it on your passbook or chequebook",
                               style: FontConstant.styleRegular(
-                                  fontSize: 10, color: AddColor.darkgrey),
+                                  fontSize: 10, color: AppColor.darkgrey),
                             )),
                         SizedBox(
                           height: SizeConfig.heightPercentage(2),
@@ -86,9 +86,9 @@ class _BankDetailState extends State<BankDetail> {
                         ),
                         CustomButton(
                             
-                            color: AddColor.primaryColor,
+                            color: AppColor.primaryColor,
                             textStyle: FontConstant.styleRegular(
-                                fontSize: 15, color: AddColor.whiteColor),
+                                fontSize: 15, color: AppColor.whiteColor),
                             text: "Verify bank details",
                             onPressed: () => {
                               Get.toNamed("/pleaseWait")
@@ -117,14 +117,14 @@ class _BankDetailState extends State<BankDetail> {
             Text(
               title,
               style: FontConstant.styleRegular(
-                  fontSize: 15, color: AddColor.darkgrey),
+                  fontSize: 15, color: AppColor.darkgrey),
             ),
             Spacer(),
             CustomButton(
                 radius: 5,
-                color: AddColor.primaryColor,
+                color: AppColor.primaryColor,
                 textStyle: FontConstant.styleRegular(
-                    fontSize: 15, color: AddColor.whiteColor),
+                    fontSize: 15, color: AppColor.whiteColor),
                 text: "Upload Photo",
                 onPressed: () => {})
           ],

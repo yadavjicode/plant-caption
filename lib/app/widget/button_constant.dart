@@ -170,14 +170,14 @@ class CustomButton extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.circular(radius ?? 25),
+        borderRadius: BorderRadius.circular(radius ?? 13),
       ),
       child: InkWell(
         splashColor: Colors.grey.shade400,
         borderRadius: BorderRadius.circular(10),
         onTap: onPressed,
         child: Padding(
-          padding: EdgeInsets.all(padding ?? 10.0),
+          padding: EdgeInsets.all(padding ?? 13.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,

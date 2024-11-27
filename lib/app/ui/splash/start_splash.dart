@@ -1,10 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:idealista/app/const/button_constant.dart';
-import 'package:idealista/app/const/font_constant.dart';
+import 'package:idealista/app/widget/button_constant.dart';
+import 'package:idealista/app/widget/font_constant.dart';
 import 'package:idealista/app/util/size.dart';
-import '../../const/addColor.dart';
+import '../../constant/app_color.dart';
 
 class StartSplash extends StatefulWidget {
   const StartSplash({super.key});
@@ -15,9 +15,9 @@ class StartSplash extends StatefulWidget {
 
 class _StartSplashState extends State<StartSplash> {
   final List<String> imgList = [
-    'assets/images/bannerA.jpeg',
-    'assets/images/bannerB.jpeg',
-    'assets/images/bannerC.jpeg',
+    'assets/images/sliderA.png',
+    'assets/images/sliderB.png',
+    'assets/images/sliderC.png',
   ];
 
   // Define a list of text captions for each image
@@ -32,6 +32,7 @@ class _StartSplashState extends State<StartSplash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColor.secondaryColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -41,7 +42,7 @@ class _StartSplashState extends State<StartSplash> {
                   options: CarouselOptions(
                     autoPlay: true,
                     enlargeCenterPage: true,
-                    aspectRatio: 4 / 5,
+                    aspectRatio: 4 / 6,
                     viewportFraction: 1.0,
                     onPageChanged: (index, reason) {
                       setState(() {
@@ -71,8 +72,8 @@ class _StartSplashState extends State<StartSplash> {
                               horizontal: 15, vertical: 8),
                           child: Text(
                             captions[index], // Display caption for each image
-                            style: FontConstant.styleBold(
-                                fontSize: 24, color: AddColor.blackColor),
+                            style: FontConstant.styleSemiBold(
+                                fontSize: 24, color: AppColor.blackColor),
 
                             textAlign: TextAlign.center,
                           ),
@@ -94,7 +95,7 @@ class _StartSplashState extends State<StartSplash> {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: _currentIndex == index
-                          ? AddColor.backgroundColor
+                          ? AppColor.backgroundColor
                           : Color.fromRGBO(0, 0, 0, 0.4),
                     ),
                   );
@@ -103,30 +104,43 @@ class _StartSplashState extends State<StartSplash> {
               const SizedBox(
                 height: 20,
               ),
-              
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Column(
                   children: [
-                    Text(
-                      "Made in India",
-                      style: FontConstant.styleRegular(
-                          fontSize: 12, color: AddColor.grey),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Made in India",
+                          style: FontConstant.styleRegular(
+                              fontSize: 12, color: AppColor.darkgrey),
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Image.asset(
+                          "assets/images/flag.png",
+                          height: 20,
+                          width: 20,
+                        )
+                      ],
                     ),
                     Text(
                       "5.3.41",
                       style: FontConstant.styleRegular(
-                          fontSize: 12, color: AddColor.grey),
+                          fontSize: 12, color: AppColor.darkgrey),
                     ),
                     const SizedBox(
                       height: 15,
                     ),
                     CustomButton(
-                        text: "Start Gardening",
-                        onPressed: () => {Get.offAndToNamed("/login")},
-                        color: AddColor.primaryColor,
-                        textStyle: FontConstant.styleRegular(
-                            fontSize: 16, color: AddColor.whiteColor)),
+                        text: "GET STARTED",
+                        onPressed: () => {
+                          Get.offAndToNamed("/login")},
+                        color: AppColor.primaryColor,
+                        textStyle: FontConstant.styleSemiBold(
+                            fontSize: 16, color: AppColor.whiteColor)),
                     SizedBox(
                       height: SizeConfig.heightPercentage(5),
                     )

@@ -1,8 +1,7 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:idealista/app/const/addColor.dart';
 import 'package:get/get.dart';
+import 'package:idealista/app/util/size.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -16,17 +15,31 @@ class _SplashState extends State<Splash> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 2), () {
-      Get.offNamed('/startSplash');
+      Get.offAndToNamed('/startSplash');
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        color: AddColor.whiteColor,
-        child: Image.asset("assets/images/logo.jpeg"),
+      body: Stack(
+        children: [
+          Center(
+            child: Image.asset(
+              "assets/images/background.png",
+              fit: BoxFit.cover,
+              height: double.infinity,
+              width: double.infinity,
+            ),
+          ),
+          Container(
+            alignment: Alignment.center,
+            child: Image.asset(
+              "assets/images/logo.png",
+              width: SizeConfig.widthPercentage(80),
+            ),
+          ),
+        ],
       ),
     );
   }

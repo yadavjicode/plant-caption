@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:idealista/app/const/addColor.dart';
+import 'package:idealista/app/constant/app_color.dart';
 
-import '../../../const/font_constant.dart';
+import '../../../widget/font_constant.dart';
 import '../../../util/size.dart';
 
 class PleaseWait extends StatefulWidget {
@@ -29,7 +29,7 @@ class _PleaseWaitState extends State<PleaseWait> {
                 "Please wait for approval to verify your account",
                 textAlign: TextAlign.center,
                 style: FontConstant.styleBold(
-                    fontSize: 18, color: AddColor.blackColor),
+                    fontSize: 18, color: AppColor.blackColor),
               ),
               SizedBox(
                 height: SizeConfig.heightPercentage(3),
@@ -37,7 +37,7 @@ class _PleaseWaitState extends State<PleaseWait> {
               Container(
                 padding: EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                    border: Border.all(color: AddColor.grey),
+                    border: Border.all(color: AppColor.grey),
                     borderRadius: BorderRadius.all(Radius.circular(10))),
                 child: GestureDetector(
                   onTap: () => {

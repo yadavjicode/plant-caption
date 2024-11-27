@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomSanckbar {
-  static void showSnackbar(BuildContext context, String message) {
+  static void showSnackbar(BuildContext context, String message,bool status) {
     final overlay = Overlay.of(context);
     final overlayEntry = OverlayEntry(
       builder: (context) => Positioned(
@@ -13,7 +13,7 @@ class CustomSanckbar {
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             decoration: BoxDecoration(
-              color: Colors.red,
+              color:status?Colors.green: Colors.red,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -26,6 +26,8 @@ class CustomSanckbar {
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
+
+                
                 IconButton(
                   icon: Icon(Icons.close, color: Colors.white),
                   onPressed: () {
