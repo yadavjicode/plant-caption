@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:idealista/app/pageRoute/page_route.dart';
 
 import 'app/util/size.dart';
-
+// degduyed edied eide dceidc wdcidw cdwic dwcidwc dwkcb wdcidw cdwicv 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
