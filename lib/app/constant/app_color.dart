@@ -10,6 +10,6 @@ class AppColor {
   static const Color primaryColorDark = Color(0xFF3700B3);
   static const Color grey = Colors.grey;
   static const Color darkgrey = const Color.fromARGB(255, 109, 107, 107);
-  static const Color secondaryColor = Color(0xFFE3FFEA);
+  static const Color secondaryColor = Color(0xFFEEFFDD);
 
 }

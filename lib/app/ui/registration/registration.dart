@@ -18,14 +18,14 @@ class _RegistrationState extends State<Registration> {
       backgroundColor: AppColor.whiteColor,
       body: SafeArea(
         child: Stack(children: [
-          Center(
-            child: Image.asset(
-              "assets/images/background.png",
-              fit: BoxFit.cover,
-              height: double.infinity,
-              width: double.infinity,
-            ),
-          ),
+          // Center(
+          //   child: Image.asset(
+          //     "assets/images/background.png",
+          //     fit: BoxFit.cover,
+          //     height: double.infinity,
+          //     width: double.infinity,
+          //   ),
+          // ),
           SingleChildScrollView(
             child: Column(
               children: [
@@ -73,7 +73,7 @@ class _RegistrationState extends State<Registration> {
                           color: AppColor.whiteColor,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       )
                     ],

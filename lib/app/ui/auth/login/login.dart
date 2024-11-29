@@ -58,17 +58,17 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppColor.whiteColor,
+        backgroundColor: AppColor.secondaryColor,
         body: Obx(() {
           return Stack(children: [
-            Center(
-              child: Image.asset(
-                "assets/images/background.png",
-                fit: BoxFit.cover,
-                height: double.infinity,
-                width: double.infinity,
-              ),
-            ),
+            // Center(
+            //   child: Image.asset(
+            //     "assets/images/background.png",
+            //     fit: BoxFit.cover,
+            //     height: double.infinity,
+            //     width: double.infinity,
+            //   ),
+            // ),
             SingleChildScrollView(
               child: Padding(
                 padding:
