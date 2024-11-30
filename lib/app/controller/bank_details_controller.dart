@@ -8,51 +8,51 @@ import 'package:idealista/app/ui/widget/CustomSnackbar.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
-class ProfileInfoController extends GetxController {
+class BankDetailsController extends GetxController {
   var isLoading = false.obs;
-  var selectedImage = Rx<File?>(null);
+  var bankImage = Rx<File?>(null);
   final ApiService apiService = ApiService();
   ProfileInfoModel? _member;
   String? _error;
   ProfileInfoModel? get member => _member;
   String? get error => _error;
 
-  Future<void> profileInfoAgent(
-      BuildContext context,
-      String firstName,
-      String lastName,
-      String gender,
-      String emailId,
-      String mobileNumber,
-      String address,
-      String city,
-      String state,
-      String pincode,
-      File selfieImg) async {
-    isLoading.value = true;
-    _error = null;
+  // Future<void> profileInfoAgent(
+  //     BuildContext context,
+  //     String firstName,
+  //     String lastName,
+  //     String gender,
+  //     String emailId,
+  //     String mobileNumber,
+  //     String address,
+  //     String city,
+  //     String state,
+  //     String pincode,
+  //     File selfieImg) async {
+  //   isLoading.value = true;
+  //   _error = null;
 
-    try {
-      _member = await apiService.profileInfoAgent(firstName, lastName, gender,
-          emailId, mobileNumber, address, city, state, pincode, selfieImg);
+  //   try {
+  //     _member = await apiService.profileInfoAgent(firstName, lastName, gender,
+  //         emailId, mobileNumber, address, city, state, pincode, selfieImg);
 
-      CustomSanckbar.showSnackbar(context, member?.message ?? "", true);
-      print('${_member?.message}');
-    } catch (e) {
-      _error = e.toString();
-      print(_error);
-      // if (!connectivityService.isConnected.value) {
-      //   CustomSanckbar.showSnackbar(context, "No internet connection!", false);
-      // } else {
-      CustomSanckbar.showSnackbar(
-          context,
-          "Something went wrong while fetching data. Please try again later!",
-          false);
-      // }
-    } finally {
-      isLoading.value = false;
-    }
-  }
+  //     CustomSanckbar.showSnackbar(context, member?.message ?? "", true);
+  //     print('${_member?.message}');
+  //   } catch (e) {
+  //     _error = e.toString();
+  //     print(_error);
+  //     // if (!connectivityService.isConnected.value) {
+  //     //   CustomSanckbar.showSnackbar(context, "No internet connection!", false);
+  //     // } else {
+  //     CustomSanckbar.showSnackbar(
+  //         context,
+  //         "Something went wrong while fetching data. Please try again later!",
+  //         false);
+  //     // }
+  //   } finally {
+  //     isLoading.value = false;
+  //   }
+  // }
 
   // // Method to handle the complete profile update process
 
@@ -108,7 +108,7 @@ class ProfileInfoController extends GetxController {
     final croppedFile = await ImageCropper().cropImage(
       sourcePath: imageFile.path,
       aspectRatio:
-          CropAspectRatio(ratioX: 4, ratioY: 4), // Custom aspect ratio 4:5
+         CropAspectRatio(ratioX: 7, ratioY: 4), // Custom aspect ratio 4:5
       uiSettings: [
         AndroidUiSettings(
           toolbarTitle: 'Crop Image',
@@ -126,7 +126,7 @@ class ProfileInfoController extends GetxController {
     );
 
     if (croppedFile != null) {
-      selectedImage.value = File(croppedFile.path);
+      bankImage.value = File(croppedFile.path);
     }
   }
 

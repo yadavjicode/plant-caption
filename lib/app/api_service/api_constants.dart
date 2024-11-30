@@ -5,4 +5,5 @@ class ApiConstants {
   static const String sendOtpUrl = "sendOTP";
   static const String verifyOtpUrl = "verifyOTP";
   static const String profileInfoUrl = "profileInfoAgent";
+         
 }

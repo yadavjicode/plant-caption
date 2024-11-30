@@ -15,7 +15,7 @@ class _RegistrationState extends State<Registration> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.whiteColor,
+      backgroundColor: AppColor.backgroundColor,
       body: SafeArea(
         child: Stack(children: [
           // Center(
@@ -79,9 +79,10 @@ class _RegistrationState extends State<Registration> {
                     ],
                   ),
                 ),
-                pageContainer("Profile Info", "profileInfo"),
-                pageContainer("Aadhaar Detail", "aadhaarDetail"),
-                pageContainer("Bank Detail", "bankDetail"),
+
+                pageContainer(context, "Profile Info", "profileInfo"),
+                pageContainer(context, "Aadhaar Detail", "aadhaarDetail"),
+                pageContainer(context, "Bank Detail", "bankDetail"),
               ],
             ),
           ),
@@ -90,10 +91,13 @@ class _RegistrationState extends State<Registration> {
     );
   }
 
-  Widget pageContainer(String value, String move) {
+  Widget pageContainer(BuildContext context, String value, String move) {
     return GestureDetector(
-      onTap: () =>
-          {FocusScope.of(context).unfocus(), Get.offAndToNamed("/$move")},
+      onTap: () {
+        Get.offAndToNamed("/$move");
+      },
+      // onTap: () =>
+      //     {FocusScope.of(context).unfocus(), Get.offAndToNamed("/$move")},
       child: Container(
         margin: EdgeInsets.only(
             left: SizeConfig.widthPercentage(3.5),

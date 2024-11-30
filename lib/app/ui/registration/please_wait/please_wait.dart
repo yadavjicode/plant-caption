@@ -16,6 +16,7 @@ class _PleaseWaitState extends State<PleaseWait> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColor.secondaryColor,
       body: SafeArea(
           child: Padding(
         padding: EdgeInsets.symmetric(
@@ -40,9 +41,7 @@ class _PleaseWaitState extends State<PleaseWait> {
                     border: Border.all(color: AppColor.grey),
                     borderRadius: BorderRadius.all(Radius.circular(10))),
                 child: GestureDetector(
-                  onTap: () => {
-                    Get.offAndToNamed("/dashboard")
-                  },
+                  onTap: () => {Get.offAndToNamed("/dashboard")},
                   child: Image.asset(
                     "assets/images/warning.png",
                     height: SizeConfig.heightPercentage(25),

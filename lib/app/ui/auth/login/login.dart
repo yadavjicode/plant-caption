@@ -58,7 +58,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppColor.secondaryColor,
+        backgroundColor: AppColor.backgroundColor,
         body: Obx(() {
           return Stack(children: [
             // Center(

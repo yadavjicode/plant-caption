@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:idealista/app/widget/button_constant.dart';
 import 'package:idealista/app/widget/font_constant.dart';
 import 'package:idealista/app/util/size.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../constant/app_color.dart';
 
 class StartSplash extends StatefulWidget {
@@ -28,11 +31,20 @@ class _StartSplashState extends State<StartSplash> {
   ];
 
   int _currentIndex = 0;
+  Future<void> _loadTokenAndNavigate() async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+    if (token != null && token.isNotEmpty) {
+      Get.offAndToNamed("/registration");
+    } else {
+      Get.offAndToNamed('/login');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.secondaryColor,
+      backgroundColor: AppColor.backgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -137,7 +149,8 @@ class _StartSplashState extends State<StartSplash> {
                     CustomButton(
                         text: "GET STARTED",
                         onPressed: () => {
-                          Get.offAndToNamed("/login")},
+                          _loadTokenAndNavigate()
+                        },
                         color: AppColor.primaryColor,
                         textStyle: FontConstant.styleSemiBold(
                             fontSize: 16, color: AppColor.whiteColor)),
