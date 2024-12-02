@@ -1,31 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:idealista/app/api_service/api_service.dart';
-import 'package:idealista/app/model/send_otp_model.dart';
+import 'package:idealista/app/model/my_profile_model.dart';
 import 'package:idealista/app/ui/widget/CustomSnackbar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class SendOtpController with ChangeNotifier {
+class MyProfilrController extends GetxController {
   final ApiService apiService = ApiService();
-  SendOtpModel? _member;
+  MyProfileModel? _member;
   var isLoading = false.obs;
   String? _error;
-  SendOtpModel? get member => _member;
+  MyProfileModel? get member => _member;
   String? get error => _error;
   // final ConnectivityService connectivityService =
-  //     Get.put(ConnectivityService());
+  //   Get.put(ConnectivityService());
 
-  Future<void> sendOtp(BuildContext context, String phoneno) async {
+  Future<void> myProfile(BuildContext context) async {
     isLoading.value = true;
     _error = null;
-    notifyListeners();
 
     try {
-      _member = await apiService.sendOtp("+91${phoneno}");
-
-      CustomSanckbar.showSnackbar(context, member?.message ?? "", true);
-      // Get.toNamed("/otpScreen");
-      print('${_member?.message}');
+      _member = await apiService.myProfile();
     } catch (e) {
       _error = e.toString();
       print(_error);
@@ -39,7 +33,6 @@ class SendOtpController with ChangeNotifier {
       // }
     } finally {
       isLoading.value = false;
-      notifyListeners();
     }
   }
 }

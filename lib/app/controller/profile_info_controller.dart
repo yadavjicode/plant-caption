@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:idealista/app/api_service/api_service.dart';
 import 'package:idealista/app/constant/app_color.dart';
+import 'package:idealista/app/controller/my_profile_controller%20copy.dart';
 import 'package:idealista/app/model/profile_info_model.dart';
 import 'package:idealista/app/ui/widget/CustomSnackbar.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -16,6 +17,9 @@ class ProfileInfoController extends GetxController {
   String? _error;
   ProfileInfoModel? get member => _member;
   String? get error => _error;
+  final MyProfilrController myProfilrController =
+      Get.put(MyProfilrController());
+
 
   Future<void> profileInfoAgent(
       BuildContext context,
@@ -37,6 +41,9 @@ class ProfileInfoController extends GetxController {
           emailId, mobileNumber, address, city, state, pincode, selfieImg);
 
       CustomSanckbar.showSnackbar(context, member?.message ?? "", true);
+      myProfilrController.myProfile(context).then((_) {
+        Get.toNamed("/aadhaarDetail");
+      });
       print('${_member?.message}');
     } catch (e) {
       _error = e.toString();

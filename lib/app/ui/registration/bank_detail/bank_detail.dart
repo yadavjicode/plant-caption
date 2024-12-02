@@ -21,7 +21,12 @@ class _BankDetailState extends State<BankDetail> {
   final BankDetailsController bankDetailsController =
       Get.put(BankDetailsController());
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
+  bool _isReEnterBankNumberHidden = true;
+  final TextEditingController holderNameControler = TextEditingController();
+  final TextEditingController accountNoControler = TextEditingController();
+  final TextEditingController reaccountNoControler = TextEditingController();
+  final TextEditingController bankNameControler = TextEditingController();
+  final TextEditingController ifscControler = TextEditingController();
   bool validation() {
     if (formKey.currentState!.validate() &&
         bankDetailsController.bankImage.value != null) {
@@ -69,8 +74,24 @@ class _BankDetailState extends State<BankDetail> {
                                 height: SizeConfig.heightPercentage(2),
                               ),
                               CustomTextField(
+                                controller: holderNameControler,
+                                labelText: "Account holder name",
+                                hintText: "Enter holder name",
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter holder name';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              SizedBox(
+                                height: SizeConfig.heightPercentage(1),
+                              ),
+                              CustomTextField(
+                                controller: accountNoControler,
                                 labelText: "Account number",
                                 hintText: "Enter Account number",
+                                obscureText: true,
                                 keyboardType: TextInputType.number,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
@@ -83,12 +104,33 @@ class _BankDetailState extends State<BankDetail> {
                                 height: SizeConfig.heightPercentage(1),
                               ),
                               CustomTextField(
+                                controller: reaccountNoControler,
                                 labelText: "Re-enter account number",
                                 hintText: "Re-enter account number",
+                                obscureText: _isReEnterBankNumberHidden,
+                                suffixIcon: IconButton(
+                                    icon: Icon(
+                                      _isReEnterBankNumberHidden
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _isReEnterBankNumberHidden =
+                                            !_isReEnterBankNumberHidden;
+                                      });
+                                    }),
                                 keyboardType: TextInputType.number,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Please enter account number';
+                                    return 'Please enter re_account number';
+                                  } else if (accountNoControler.text
+                                          .toString()
+                                          .trim() !=
+                                      reaccountNoControler.text
+                                          .toString()
+                                          .trim()) {
+                                    return 'Please enter correct account number';
                                   }
                                   return null;
                                 },
@@ -97,6 +139,7 @@ class _BankDetailState extends State<BankDetail> {
                                 height: SizeConfig.heightPercentage(1),
                               ),
                               CustomTextField(
+                                controller: bankNameControler,
                                 labelText: "Bank name",
                                 hintText: "Enter Bank name",
                                 validator: (value) {
@@ -110,6 +153,7 @@ class _BankDetailState extends State<BankDetail> {
                                 height: SizeConfig.heightPercentage(1),
                               ),
                               CustomTextField(
+                                controller: ifscControler,
                                 labelText: "IFSC code",
                                 hintText: "Enter IFSC code",
                                 validator: (value) {
@@ -174,7 +218,24 @@ class _BankDetailState extends State<BankDetail> {
                                   text: "Verify bank details",
                                   onPressed: () => {
                                         if (validation())
-                                          {Get.toNamed("/pleaseWait")}
+                                          {
+                                            bankDetailsController.bankDetails(
+                                                context,
+                                                holderNameControler.text
+                                                    .toString()
+                                                    .trim(),
+                                                reaccountNoControler.text
+                                                    .toString()
+                                                    .trim(),
+                                                bankNameControler.text
+                                                    .toString()
+                                                    .trim(),
+                                                ifscControler.text
+                                                    .toString()
+                                                    .trim(),
+                                                bankDetailsController
+                                                    .bankImage.value!)
+                                          }
                                       })
                             ],
                           ),

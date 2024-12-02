@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:idealista/app/api_service/api_service.dart';
 import 'package:idealista/app/constant/app_color.dart';
-import 'package:idealista/app/model/profile_info_model.dart';
+import 'package:idealista/app/controller/my_profile_controller%20copy.dart';
+import 'package:idealista/app/model/aadhaar_details_model.dart';
 import 'package:idealista/app/ui/widget/CustomSnackbar.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -13,47 +14,43 @@ class AddhaarController extends GetxController {
   var frontAddharImage = Rx<File?>(null);
   var backAddharImage = Rx<File?>(null);
   final ApiService apiService = ApiService();
-  ProfileInfoModel? _member;
+  AadhaarDetailsModel? _member;
   String? _error;
-  ProfileInfoModel? get member => _member;
+  AadhaarDetailsModel? get member => _member;
   String? get error => _error;
+  final MyProfilrController myProfilrController =
+      Get.put(MyProfilrController());
 
-  // Future<void> profileInfoAgent(
-  //     BuildContext context,
-  //     String firstName,
-  //     String lastName,
-  //     String gender,
-  //     String emailId,
-  //     String mobileNumber,
-  //     String address,
-  //     String city,
-  //     String state,
-  //     String pincode,
-  //     File selfieImg) async {
-  //   isLoading.value = true;
-  //   _error = null;
+  Future<void> aadhaarDetails(BuildContext context, String aadhaarNumber,
+      File aadharImgFrontSide, File aadharImgBackSide) async {
+    isLoading.value = true;
+    _error = null;
 
-  //   try {
-  //     _member = await apiService.profileInfoAgent(firstName, lastName, gender,
-  //         emailId, mobileNumber, address, city, state, pincode, selfieImg);
+    try {
+      _member = await apiService.aadhaarDetails(
+          aadhaarNumber, aadharImgFrontSide, aadharImgBackSide);
 
-  //     CustomSanckbar.showSnackbar(context, member?.message ?? "", true);
-  //     print('${_member?.message}');
-  //   } catch (e) {
-  //     _error = e.toString();
-  //     print(_error);
-  //     // if (!connectivityService.isConnected.value) {
-  //     //   CustomSanckbar.showSnackbar(context, "No internet connection!", false);
-  //     // } else {
-  //     CustomSanckbar.showSnackbar(
-  //         context,
-  //         "Something went wrong while fetching data. Please try again later!",
-  //         false);
-  //     // }
-  //   } finally {
-  //     isLoading.value = false;
-  //   }
-  // }
+      CustomSanckbar.showSnackbar(context, member?.message ?? "", true);
+      myProfilrController.myProfile(context).then((_) {
+        Get.toNamed("/bankDetail");
+      });
+
+      print('${_member?.message}');
+    } catch (e) {
+      _error = e.toString();
+      print(_error);
+      // if (!connectivityService.isConnected.value) {
+      //   CustomSanckbar.showSnackbar(context, "No internet connection!", false);
+      // } else {
+      CustomSanckbar.showSnackbar(
+          context,
+          "Something went wrong while fetching data. Please try again later!",
+          false);
+      // }
+    } finally {
+      isLoading.value = false;
+    }
+  }
 
   // // Method to handle the complete profile update process
 

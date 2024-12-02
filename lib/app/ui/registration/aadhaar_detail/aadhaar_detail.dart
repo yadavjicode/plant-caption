@@ -18,6 +18,7 @@ class AadhaarDetail extends StatefulWidget {
 
 class _AadhaarDetailState extends State<AadhaarDetail> {
   final AddhaarController addhaarController = Get.put(AddhaarController());
+  final TextEditingController aadhaarController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   bool validation() {
@@ -145,6 +146,7 @@ class _AadhaarDetailState extends State<AadhaarDetail> {
                               ),
                               CustomTextField(
                                 keyboardType: TextInputType.number,
+                                controller: aadhaarController,
                                 maxlength: 12,
                                 labelText: "Aadhaar Number",
                                 hintText: "Enter Aadhaar Number",
@@ -173,7 +175,20 @@ class _AadhaarDetailState extends State<AadhaarDetail> {
                                   textStyle: FontConstant.styleRegular(
                                       fontSize: 15, color: AppColor.whiteColor),
                                   text: "Submit",
-                                  onPressed: () => {if (validation()) {}})
+                                  onPressed: () => {
+                                        if (validation())
+                                          {
+                                            addhaarController.aadhaarDetails(
+                                                context,
+                                                aadhaarController.text
+                                                    .toString()
+                                                    .trim(),
+                                                addhaarController
+                                                    .frontAddharImage.value!,
+                                                addhaarController
+                                                    .backAddharImage.value!)
+                                          }
+                                      })
                             ],
                           ),
                         ),
@@ -184,7 +199,7 @@ class _AadhaarDetailState extends State<AadhaarDetail> {
               ),
             ),
             if (addhaarController.isLoading.value)
-              Center(
+              const Center(
                   child: CircularProgressIndicator(
                 color: AppColor.primaryColor,
               ))

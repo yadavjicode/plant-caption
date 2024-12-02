@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:idealista/app/controller/my_profile_controller%20copy.dart';
 import 'package:idealista/app/controller/profile_info_controller.dart';
 import 'package:idealista/app/ui/widget/CustomSnackbar.dart';
 import 'package:idealista/app/widget/CustomTextFeild.dart';
@@ -24,6 +25,10 @@ class _ProfileInfoState extends State<ProfileInfo> {
       Get.put(ProfileInfoController());
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
+  final MyProfilrController myProfilrController =
+      Get.put(MyProfilrController());
 
   String getGender() {
     if (gender == 1) {
@@ -38,7 +43,8 @@ class _ProfileInfoState extends State<ProfileInfo> {
   bool validation() {
     if (formKey.currentState!.validate() &&
         getGender().isNotEmpty &&
-        profileInfoController.selectedImage.value != null) {
+        profileInfoController.selectedImage.value != null &&
+        myProfilrController.member?.data?.mobileNumber != null) {
       return true;
     } else if (profileInfoController.selectedImage.value == null) {
       CustomSanckbar.showSnackbar(
@@ -46,6 +52,12 @@ class _ProfileInfoState extends State<ProfileInfo> {
       return false;
     } else if (getGender().isEmpty) {
       CustomSanckbar.showSnackbar(context, "Please select gender!", false);
+      return false;
+    } else if (myProfilrController.member?.data?.mobileNumber == null) {
+      CustomSanckbar.showSnackbar(
+          context,
+          "Something went wrong while fetching data. Please try again later!",
+          false);
       return false;
     } else {
       return false;
@@ -83,7 +95,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                             Container(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  "Enter Some basic details",
+                                  "Enter Some basic details ${myProfilrController.member?.data?.firstName}",
                                   style: FontConstant.styleSemiBold(
                                       fontSize: 17, color: AppColor.blackColor),
                                 )),
@@ -152,6 +164,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                               height: SizeConfig.heightPercentage(3),
                             ),
                             CustomTextField(
+                              controller: firstNameController,
                               labelText: "First name*",
                               hintText: "Enter First name",
                               validator: (value) {
@@ -163,6 +176,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                             ),
                             SizedBox(height: SizeConfig.heightPercentage(2)),
                             CustomTextField(
+                              controller: lastNameController,
                               labelText: "Last name*",
                               hintText: "Enter Last name",
                               validator: (value) {
@@ -242,19 +256,26 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                 text: "Submit",
                                 onPressed: () {
                                   if (validation()) {
-                                    // profileInfoController.profileInfoAgent(
-                                    //     context,
-                                    //     "Prashant",
-                                    //     "yadav",
-                                    //     "Male",
-                                    //     "prahan3t@gmail.com",
-                                    //     "99712536302",
-                                    //     "",
-                                    //     "",
-                                    //     "",
-                                    //     "",
-                                    //     profileInfoController
-                                    //         .selectedImage.value!)
+                                    profileInfoController.profileInfoAgent(
+                                        context,
+                                        firstNameController.text
+                                            .toString()
+                                            .trim(),
+                                        lastNameController.text
+                                            .toString()
+                                            .trim(),
+                                        getGender(),
+                                        "",
+                                        myProfilrController
+                                            .member?.data?.mobileNumber,
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        profileInfoController
+                                            .selectedImage.value!);
+                                    print(
+                                        "image path ${profileInfoController.selectedImage.value!}");
                                   }
                                 })
                           ],

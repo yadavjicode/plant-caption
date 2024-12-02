@@ -133,9 +133,12 @@ class _LoginState extends State<Login> {
                                     }
                                   else
                                     {
-                                      sendOtpController.sendOtp(context,
-                                          phoneno.text.toString().trim()),
-                                      _showBottomSheet(context)
+                                      sendOtpController
+                                          .sendOtp(context,
+                                              phoneno.text.toString().trim())
+                                          .then((_) {
+                                        _showBottomSheet(context);
+                                      }),
                                     }
                                 })),
                     Container(
@@ -168,12 +171,12 @@ class _LoginState extends State<Login> {
       margin: EdgeInsets.all(3),
       child: TextField(
         controller: controller,
+        keyboardType: TextInputType.number,
         focusNode: currentFocus,
         decoration: InputDecoration(
           counterText: '',
           border: OutlineInputBorder(),
         ),
-        keyboardType: TextInputType.number,
         textAlign: TextAlign.center,
         maxLength: 1,
         onChanged: (value) {
@@ -193,12 +196,12 @@ class _LoginState extends State<Login> {
       margin: EdgeInsets.all(3),
       child: TextField(
         controller: _firstController,
+        keyboardType: TextInputType.number,
         focusNode: _firstFocusNode,
         decoration: InputDecoration(
           counterText: '',
           border: OutlineInputBorder(),
         ),
-        keyboardType: TextInputType.number,
         textAlign: TextAlign.center,
         maxLength: 1,
         onChanged: (value) {
@@ -216,13 +219,13 @@ class _LoginState extends State<Login> {
       margin: const EdgeInsets.all(3),
       child: TextField(
         controller: _sixthController,
+        keyboardType: TextInputType.number,
         focusNode: _sixthFocusNode,
         obscureText: false,
         decoration: const InputDecoration(
           counterText: '',
           border: OutlineInputBorder(),
         ),
-        keyboardType: TextInputType.number,
         textAlign: TextAlign.center,
         maxLength: 1,
         onChanged: (value) {

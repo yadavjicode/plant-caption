@@ -16,7 +16,7 @@ class _PleaseWaitState extends State<PleaseWait> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.secondaryColor,
+      backgroundColor: AppColor.backgroundColor,
       body: SafeArea(
           child: Padding(
         padding: EdgeInsets.symmetric(

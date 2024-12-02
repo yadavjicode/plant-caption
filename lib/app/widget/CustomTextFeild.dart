@@ -56,6 +56,7 @@ class CustomTextField extends StatelessWidget {
           keyboardType: keyboardType ?? TextInputType.text,
           maxLength: maxlength ?? 500,
           maxLines: maxline ?? 1,
+          
           decoration: InputDecoration(
             filled: true,
             fillColor: Colors.white,
