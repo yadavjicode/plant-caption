@@ -20,7 +20,6 @@ class ProfileInfoController extends GetxController {
   final MyProfilrController myProfilrController =
       Get.put(MyProfilrController());
 
-
   Future<void> profileInfoAgent(
       BuildContext context,
       String firstName,
