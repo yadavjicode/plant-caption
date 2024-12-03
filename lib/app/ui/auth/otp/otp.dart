@@ -1,9 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/route_manager.dart';
-import 'package:get/utils.dart';
 import 'package:idealista/app/constant/app_color.dart';
+import 'package:idealista/app/util/size.dart';
 import 'package:idealista/app/widget/button_constant.dart';
 import 'package:idealista/app/widget/font_constant.dart';
 import 'package:otp_text_field/otp_field.dart';
@@ -34,12 +32,10 @@ class OTPScreen extends StatefulWidget {
 }
 
 class _OTPScreenState extends State<OTPScreen> {
-
-  // final StateController stateController = Get.put(StateController());
   String otp = '';
  
   OtpFieldController otpbox = OtpFieldController();
-  // final Map<String, dynamic> arguments = Get.arguments;
+  final Map<String, dynamic> arguments = Get.arguments;
 
   // TextEditingController otpboxa = TextEditingController();
 
@@ -47,7 +43,7 @@ class _OTPScreenState extends State<OTPScreen> {
   void initState() {
     super.initState();
     // _requestSmsPermissions();
-    // stateController.getStateList();
+    
   }
 
   // Future<void> _requestSmsPermissions() async {
@@ -88,8 +84,8 @@ class _OTPScreenState extends State<OTPScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final String phoneEmail = arguments['phoneEmail'];
-    final String phoneEmail ="565757856876";
+    final String phoneEmail = arguments['phoneno'];
+    
     // final String go = arguments['go'];
     return Scaffold(
         backgroundColor: AppColor.backgroundColor,
@@ -98,11 +94,9 @@ class _OTPScreenState extends State<OTPScreen> {
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
-              // if (go == "mobile") {
-              //   Get.offAndToNamed('/mobile');
-              // } else if (go == "email") {
-              //   Get.offAndToNamed('/email');
-              // }
+             
+                Get.offAndToNamed('/login');
+             
             },
           ),
           elevation: 0,
@@ -122,15 +116,14 @@ class _OTPScreenState extends State<OTPScreen> {
                         margin: EdgeInsets.only(top: 40),
                         alignment: Alignment.center,
                         child: Image.asset(
-                          "assets/images/otp.png",
-                          height: 150,
-                          width: 200,
+                          "assets/images/logo.png",
+                          width: SizeConfig.widthPercentage(80),
                         )),
                     Padding(
                       padding: const EdgeInsets.only(top: 50, bottom: 20),
                       child: Center(
                         child: Text(
-                          'Code is sent to ${phoneEmail.substring(0, 2)}******${phoneEmail.substring(10, 12)}',
+                          'Code is sent to ${phoneEmail.substring(0, 2)}******${phoneEmail.substring(8, 10)}',
                           style: FontConstant.styleRegular(
                             fontSize: 16,
                             color: Colors.black,
@@ -152,6 +145,7 @@ class _OTPScreenState extends State<OTPScreen> {
                         length: 4,
                         width: MediaQuery.of(context).size.width,
                         fieldWidth: 50,
+                        keyboardType: TextInputType.number,
                         style: TextStyle(fontSize: 17),
                         textFieldAlignment: MainAxisAlignment.spaceAround,
                         fieldStyle: FieldStyle.box,

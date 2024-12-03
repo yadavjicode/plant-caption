@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:idealista/app/api_service/api_service.dart';
 import 'package:idealista/app/model/send_otp_model.dart';
 import 'package:idealista/app/ui/widget/CustomSnackbar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SendOtpController with ChangeNotifier {
   final ApiService apiService = ApiService();
@@ -24,8 +23,8 @@ class SendOtpController with ChangeNotifier {
       _member = await apiService.sendOtp("+91${phoneno}");
 
       CustomSanckbar.showSnackbar(context, member?.message ?? "", true);
-      // Get.toNamed("/otpScreen");
-      print('${_member?.message}');
+      // Get.offAndToNamed("/otpScreen",arguments: {"phoneno":phoneno});
+      // print('${_member?.message}');
     } catch (e) {
       _error = e.toString();
       print(_error);

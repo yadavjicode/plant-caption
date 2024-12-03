@@ -41,7 +41,10 @@ class _PleaseWaitState extends State<PleaseWait> {
                     border: Border.all(color: AppColor.grey),
                     borderRadius: BorderRadius.all(Radius.circular(10))),
                 child: GestureDetector(
-                  onTap: () => {Get.offAndToNamed("/dashboard")},
+                  onTap: () => {
+                    // Get.offAndToNamed("/dashboard")
+                    // Get.offAndToNamed("/otpScreen",arguments: {"phoneno":"9971253602"})
+                    },
                   child: Image.asset(
                     "assets/images/warning.png",
                     height: SizeConfig.heightPercentage(25),

@@ -3,12 +3,14 @@ import 'dart:async';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:idealista/app/controller/my_profile_controller%20copy.dart';
+import 'package:idealista/app/pageRoute/page_route.dart';
+
 import 'package:idealista/app/widget/button_constant.dart';
 import 'package:idealista/app/widget/font_constant.dart';
 import 'package:idealista/app/util/size.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../constant/app_color.dart';
+import '../../controller/my_profile_controller copy.dart';
 
 class StartSplash extends StatefulWidget {
   const StartSplash({super.key});
@@ -38,19 +40,17 @@ class _StartSplashState extends State<StartSplash> {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
     if (token != null && token.isNotEmpty) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        myProfilrController.myProfile(context).then((_) {
-          if (myProfilrController.member?.data?.profileInfoStepFirst &&
-              myProfilrController.member?.data?.aadharInfoStepSecond &&
-              myProfilrController.member?.data?.bankInfoStepThird) {
-            Get.offAndToNamed("/pleaseWait");
-          } else {
-            Get.offAndToNamed("/registration");
-          }
-        });
+      myProfilrController.myProfile(context).then((_) {
+        if (myProfilrController.member?.data?.profileInfoStepFirst &&
+            myProfilrController.member?.data?.aadharInfoStepSecond &&
+            myProfilrController.member?.data?.bankInfoStepThird) {
+          Get.offAndToNamed(PageRoutes.pleaseWait);
+        } else {
+          Get.offAndToNamed(PageRoutes.registration);
+        }
       });
     } else {
-      Get.offAndToNamed('/login');
+      Get.offAndToNamed(PageRoutes.login);
     }
   }
 

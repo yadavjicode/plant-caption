@@ -40,6 +40,15 @@ class _AadhaarDetailState extends State<AadhaarDetail> {
   }
 
   @override
+  void dispose() {
+    addhaarController.frontAddharImage.value = null;
+    addhaarController.backAddharImage.value = null;
+    aadhaarController.clear(); // Clear the Aadhaar number input
+    
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppColor.backgroundColor,

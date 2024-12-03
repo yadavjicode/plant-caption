@@ -41,6 +41,16 @@ class _BankDetailState extends State<BankDetail> {
     }
   }
 
+
+  @override
+  void dispose() {
+    bankDetailsController.bankImage.value = null;
+    // bankDetailsController.dispose();
+    super.dispose();
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

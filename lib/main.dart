@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return GetMaterialApp(
-      initialRoute: '/splash', // Set initial route
+      initialRoute: PageRoutes.splash, // Set initial route
       getPages: PageRoutes.routes,
       debugShowCheckedModeBanner: false,
     );

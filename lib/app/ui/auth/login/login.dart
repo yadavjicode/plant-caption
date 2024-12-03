@@ -4,6 +4,7 @@ import 'package:idealista/app/constant/app_color.dart';
 import 'package:idealista/app/controller/send_otp_controller.dart';
 import 'package:idealista/app/controller/verify_otp_controller.dart';
 import 'package:idealista/app/util/size.dart';
+import 'package:idealista/app/util/validation.dart';
 import 'package:idealista/app/widget/CustomTextFeild.dart';
 import 'package:idealista/app/ui/widget/CustomSnackbar.dart';
 
@@ -19,6 +20,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final TextEditingController phoneno = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController _firstController = TextEditingController();
   final TextEditingController _secondController = TextEditingController();
   final TextEditingController _thirdController = TextEditingController();
@@ -61,103 +63,91 @@ class _LoginState extends State<Login> {
         backgroundColor: AppColor.backgroundColor,
         body: Obx(() {
           return Stack(children: [
-            // Center(
-            //   child: Image.asset(
-            //     "assets/images/background.png",
-            //     fit: BoxFit.cover,
-            //     height: double.infinity,
-            //     width: double.infinity,
-            //   ),
-            // ),
             SingleChildScrollView(
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 22, vertical: 15),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: SizeConfig.heightPercentage(10),
-                    ),
-                    Container(
-                      child: Image.asset(
-                        "assets/images/logo.png",
-                        width: SizeConfig.widthPercentage(80),
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: SizeConfig.heightPercentage(10),
                       ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 20, bottom: 5),
-                      child: Text(
-                        "Hi User!",
-                        style: FontConstant.styleSemiBold(
-                            fontSize: 20, color: AppColor.blackColor),
+                      Container(
+                        child: Image.asset(
+                          "assets/images/logo.png",
+                          width: SizeConfig.widthPercentage(80),
+                        ),
                       ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(bottom: 30),
-                      child: Text(
-                        "Please  sign in your account.",
-                        style: FontConstant.styleRegular(
-                            fontSize: 14, color: AppColor.darkgrey),
+                      Container(
+                        margin: EdgeInsets.only(top: 20, bottom: 5),
+                        child: Text(
+                          "Hi User!",
+                          style: FontConstant.styleSemiBold(
+                              fontSize: 20, color: AppColor.blackColor),
+                        ),
                       ),
-                    ),
-                    Container(
-                        padding: EdgeInsets.symmetric(vertical: 10),
-                        child: CustomTextField(
-                          keyboardType: TextInputType.number,
-                          maxlength: 10,
-                          controller: phoneno,
-                          labelText: "Mobile No",
-                          hintText: "Enter Mobile no",
-                        )),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    SizedBox(
-                        width: double.infinity,
-                        child: CustomButton(
-                            color: AppColor.primaryColor,
-                            textStyle: FontConstant.styleSemiBold(
-                                fontSize: 16, color: AppColor.whiteColor),
-                            text: "Send OTP",
-                            onPressed: () => {
-                                  if (phoneno.text.isEmpty)
-                                    {
-                                      CustomSanckbar.showSnackbar(
-                                          context, "Mobile no is empty", false)
-                                    }
-                                  else if (phoneno.text.length < 10)
-                                    {
-                                      CustomSanckbar.showSnackbar(context,
-                                          "Fill 10 digit mobile no", false)
-                                    }
-                                  else
-                                    {
-                                      sendOtpController
-                                          .sendOtp(context,
-                                              phoneno.text.toString().trim())
-                                          .then((_) {
-                                        _showBottomSheet(context);
-                                      }),
-                                    }
-                                })),
-                    Container(
-                      margin: EdgeInsets.only(top: 10),
-                      child: Text(
-                        "OTP will send on your mobile no which\nyou enter above",
-                        textAlign: TextAlign.center,
-                        style: FontConstant.styleRegular(
-                            fontSize: 12, color: AppColor.darkgrey),
+                      Container(
+                        margin: EdgeInsets.only(bottom: 30),
+                        child: Text(
+                          "Please  sign in your account.",
+                          style: FontConstant.styleRegular(
+                              fontSize: 14, color: AppColor.darkgrey),
+                        ),
                       ),
-                    ),
-                  ],
+                      Container(
+                          padding: EdgeInsets.symmetric(vertical: 10),
+                          child: CustomTextField(
+                            keyboardType: TextInputType.number,
+                            maxlength: 10,
+                            controller: phoneno,
+                            labelText: "Mobile No",
+                            hintText: "Enter Mobile no",
+                            validator: (value) {
+                              return Validation.validatePhoneno(value);
+                            },
+                          )),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      SizedBox(
+                          width: double.infinity,
+                          child: CustomButton(
+                              color: AppColor.primaryColor,
+                              textStyle: FontConstant.styleSemiBold(
+                                  fontSize: 16, color: AppColor.whiteColor),
+                              text: "Send OTP",
+                              onPressed: () => {
+                                    if (formKey.currentState!.validate())
+                                      {
+                                        sendOtpController
+                                            .sendOtp(context,
+                                                phoneno.text.toString().trim())
+                                            .then((_) {
+                                          _showBottomSheet(context);
+                                        }),
+                                      }
+                                  })),
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: Text(
+                          "OTP will send on your mobile no which\nyou enter above",
+                          textAlign: TextAlign.center,
+                          style: FontConstant.styleRegular(
+                              fontSize: 12, color: AppColor.darkgrey),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
             if (sendOtpController.isLoading.value ||
                 verifyOtpController.isLoading.value)
-              Center(
-                  child: const CircularProgressIndicator(
+              const Center(
+                  child: CircularProgressIndicator(
                 color: AppColor.primaryColor,
               ))
           ]);
@@ -182,7 +172,7 @@ class _LoginState extends State<Login> {
         onChanged: (value) {
           if (value.length == 1 && nextFocus != null) {
             FocusScope.of(context).requestFocus(nextFocus);
-          } else if (value.length == 0) {
+          } else if (value.isEmpty) {
             FocusScope.of(context).previousFocus();
           }
         },
@@ -229,7 +219,7 @@ class _LoginState extends State<Login> {
         textAlign: TextAlign.center,
         maxLength: 1,
         onChanged: (value) {
-          if (value.length == 0) {
+          if (value.isEmpty) {
             FocusScope.of(context).requestFocus(_fifthFocusNode);
           }
         },

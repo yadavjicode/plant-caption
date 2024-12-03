@@ -24,75 +24,158 @@ class _RegistrationState extends State<Registration> {
     });
   }
 
+  Widget aadhaarIcon() {
+    if (myProfilrController.member?.data?.profileInfoStepFirst) {
+      if (myProfilrController.member?.data?.aadharInfoStepSecond) {
+        return Icon(
+          Icons.check,
+          color: AppColor.primaryColor,
+        );
+      } else {
+        return Icon(Icons.forward, color: AppColor.darkRed);
+      }
+    } else {
+      return Icon(Icons.lock);
+    }
+  }
+
+  Widget bankIcon() {
+    if (myProfilrController.member?.data?.profileInfoStepFirst &&
+        myProfilrController.member?.data?.aadharInfoStepSecond) {
+      if (myProfilrController.member?.data?.bankInfoStepThird) {
+        return Icon(
+          Icons.check,
+          color: AppColor.primaryColor,
+        );
+      } else {
+        return Icon(
+          Icons.forward,
+          color: AppColor.darkRed,
+        );
+      }
+    } else {
+      return Icon(Icons.lock);
+    }
+  }
+
+  bool profileStatus() {
+    if (myProfilrController.member?.data?.profileInfoStepFirst) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  bool aadhaarStatus() {
+    if (myProfilrController.member?.data?.profileInfoStepFirst) {
+      if (myProfilrController.member?.data?.aadharInfoStepSecond) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  bool bankStatus() {
+    if (myProfilrController.member?.data?.profileInfoStepFirst &&
+        myProfilrController.member?.data?.aadharInfoStepSecond) {
+      if (myProfilrController.member?.data?.bankInfoStepThird) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppColor.backgroundColor,
         body: Obx(() {
           return Stack(children: [
-            SafeArea(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    // GestureDetector(
-                    //   onTap: () => {Get.offAndToNamed("/login")},
-                    //   child: Container(
-                    //       padding: EdgeInsets.all(SizeConfig.widthPercentage(3)),
-                    //       alignment: Alignment.centerLeft,
-                    //       child: const Icon(Icons.arrow_back,color: AppColor.blackColor,)),
-                    // ),
-                    Container(
-                      decoration:
-                          const BoxDecoration(color: AppColor.primaryColor),
-                      padding: EdgeInsets.symmetric(
-                          vertical: SizeConfig.heightPercentage(1)),
-                      child: Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () => {Get.offAndToNamed("/login")},
-                            child: Container(
-                                padding: EdgeInsets.all(
-                                    SizeConfig.widthPercentage(3)),
-                                alignment: Alignment.centerLeft,
-                                child: const Icon(
-                                  Icons.arrow_back,
-                                  color: AppColor.whiteColor,
-                                )),
-                          ),
-                          Expanded(
-                              child: Text(
-                            "Please Complete all the steps to activate your account",
-                            style: FontConstant.styleMedium(
-                                fontSize: 15, color: AppColor.whiteColor),
-                          )),
-                          Container(
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: AppColor.whiteColor, width: 2),
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(4))),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: SizeConfig.widthPercentage(2),
-                                vertical: SizeConfig.heightPercentage(0.5)),
-                            child: const Icon(
-                              Icons.person_sharp,
-                              color: AppColor.whiteColor,
+            if (!myProfilrController.isLoading.value)
+              SafeArea(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      // GestureDetector(
+                      //   onTap: () => {Get.offAndToNamed("/login")},
+                      //   child: Container(
+                      //       padding: EdgeInsets.all(SizeConfig.widthPercentage(3)),
+                      //       alignment: Alignment.centerLeft,
+                      //       child: const Icon(Icons.arrow_back,color: AppColor.blackColor,)),
+                      // ),
+                      Container(
+                        decoration:
+                            const BoxDecoration(color: AppColor.primaryColor),
+                        padding: EdgeInsets.symmetric(
+                            vertical: SizeConfig.heightPercentage(1)),
+                        child: Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () => {Get.offAndToNamed("/login")},
+                              child: Container(
+                                  padding: EdgeInsets.all(
+                                      SizeConfig.widthPercentage(3)),
+                                  alignment: Alignment.centerLeft,
+                                  child: const Icon(
+                                    Icons.arrow_back,
+                                    color: AppColor.whiteColor,
+                                  )),
                             ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          )
-                        ],
+                            Expanded(
+                                child: Text(
+                              "Please Complete all the steps to activate your account",
+                              style: FontConstant.styleMedium(
+                                  fontSize: 15, color: AppColor.whiteColor),
+                            )),
+                            Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: AppColor.whiteColor, width: 2),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(4))),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: SizeConfig.widthPercentage(2),
+                                  vertical: SizeConfig.heightPercentage(0.5)),
+                              child: const Icon(
+                                Icons.person_sharp,
+                                color: AppColor.whiteColor,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            )
+                          ],
+                        ),
                       ),
-                    ),
 
-                    pageContainer(context, "Profile Info", "profileInfo"),
-                    pageContainer(context, "Aadhaar Detail", "aadhaarDetail"),
-                    pageContainer(context, "Bank Detail", "bankDetail"),
-                  ],
+                      pageContainer(
+                          context,
+                          "Profile Info",
+                          "profileInfo",
+                          myProfilrController.member?.data?.profileInfoStepFirst
+                              ? const Icon(
+                                  Icons.check,
+                                  color: AppColor.primaryColor,
+                                )
+                              : const Icon(
+                                  Icons.forward,
+                                  color: AppColor.darkRed,
+                                ),
+                          profileStatus()),
+                      pageContainer(context, "Aadhaar Detail", "aadhaarDetail",
+                          aadhaarIcon(), aadhaarStatus()),
+                      pageContainer(context, "Bank Detail", "bankDetail",
+                          bankIcon(), bankStatus()),
+                    ],
+                  ),
                 ),
               ),
-            ),
             if (myProfilrController.isLoading.value)
               const Center(
                   child: CircularProgressIndicator(
@@ -102,10 +185,11 @@ class _RegistrationState extends State<Registration> {
         }));
   }
 
-  Widget pageContainer(BuildContext context, String value, String move) {
+  Widget pageContainer(BuildContext context, String value, String move,
+      Widget icon, bool status) {
     return GestureDetector(
       onTap: () {
-        Get.offAndToNamed("/$move");
+        status ? Get.offAndToNamed("/$move") : null;
       },
       // onTap: () =>
       //     {FocusScope.of(context).unfocus(), Get.offAndToNamed("/$move")},
@@ -119,7 +203,8 @@ class _RegistrationState extends State<Registration> {
             vertical: SizeConfig.heightPercentage(3)),
         decoration: BoxDecoration(
             color: AppColor.secondaryColor,
-            border: Border.all(color: AppColor.primaryColor),
+            border: Border.all(
+                color: status ? AppColor.darkRed : AppColor.primaryColor),
             borderRadius: const BorderRadius.all(Radius.circular(10))),
         child: Row(
           children: [
@@ -129,7 +214,7 @@ class _RegistrationState extends State<Registration> {
               style: FontConstant.styleMedium(
                   fontSize: 15, color: AppColor.blackColor),
             )),
-            const Icon(Icons.arrow_forward)
+            icon
           ],
         ),
       ),

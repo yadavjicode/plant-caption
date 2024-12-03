@@ -65,6 +65,13 @@ class _ProfileInfoState extends State<ProfileInfo> {
   }
 
   @override
+  void dispose() {
+    profileInfoController.selectedImage.value = null;
+    // Clear the Aadhaar number input
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppColor.backgroundColor,
