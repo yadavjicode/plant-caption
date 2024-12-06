@@ -32,7 +32,7 @@ class AddhaarController extends GetxController {
 
       CustomSanckbar.showSnackbar(context, member?.message ?? "", true);
       myProfilrController.myProfile(context).then((_) {
-        Get.toNamed("/bankDetail");
+        Get.offAndToNamed("/bankDetail");
       });
 
       print('${_member?.message}');

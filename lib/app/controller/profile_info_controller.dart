@@ -41,7 +41,7 @@ class ProfileInfoController extends GetxController {
 
       CustomSanckbar.showSnackbar(context, member?.message ?? "", true);
       myProfilrController.myProfile(context).then((_) {
-        Get.toNamed("/aadhaarDetail");
+        Get.offAndToNamed("/aadhaarDetail");
       });
       print('${_member?.message}');
     } catch (e) {

@@ -3,15 +3,17 @@ import 'dart:async';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:idealista/app/constant/app_color.dart';
+import 'package:idealista/app/ui/dashboard/home/home.dart';
+import 'package:idealista/app/widget/font_constant.dart';
 
-class Dashboard extends StatefulWidget {
-  const Dashboard({Key? key}) : super(key: key);
+class CurrentLocation extends StatefulWidget {
+  const CurrentLocation({Key? key}) : super(key: key);
 
   @override
-  _DashboardState createState() => _DashboardState();
+  _CurrentLocationState createState() => _CurrentLocationState();
 }
 
-class _DashboardState extends State<Dashboard> {
+class _CurrentLocationState extends State<CurrentLocation> {
   Completer<GoogleMapController> _controller = Completer();
   final List<Marker> _markers = <Marker>[];
 
@@ -53,13 +55,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFF0F9D58),
-        title: Text(
-          "Location",
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
+      
       body: SafeArea(
         child: Stack(
           children: [
@@ -90,6 +86,71 @@ class _DashboardState extends State<Dashboard> {
             )
           ],
         ),
+      ),
+    );
+  }
+}
+
+
+
+class Dashboard extends StatefulWidget {
+  const Dashboard({super.key});
+
+  @override
+  State<Dashboard> createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
+  int _selectedIndex = 0;
+  final List<Widget> _pages = [
+    home(),
+    SizedBox.shrink(),
+    SizedBox.shrink(),
+    SizedBox.shrink()
+  ];
+
+  void _onItemTapped(int index) {
+    // Navigate to the respective page for other icons
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColor.backgroundColor,
+      body: _pages[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: AppColor.backgroundColor,
+        currentIndex: _selectedIndex,
+        type: BottomNavigationBarType.fixed,
+        selectedLabelStyle: FontConstant.styleSemiBold(
+            fontSize: 13, color: AppColor.primaryColor),
+        unselectedLabelStyle:
+            FontConstant.styleMedium(fontSize: 12, color: AppColor.darkgrey),
+        selectedItemColor:
+            AppColor.primaryColor, // Set color for selected item text and icon
+        unselectedItemColor: AppColor.darkgrey,
+        onTap: _onItemTapped, // Handle navigation
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.feed),
+            label: 'Feeds',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.currency_rupee),
+            label: 'payout',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.menu),
+            label: 'Account',
+          ),
+        ],
       ),
     );
   }
