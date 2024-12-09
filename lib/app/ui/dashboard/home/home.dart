@@ -13,7 +13,7 @@ class home extends StatefulWidget {
 }
 
 class _homeState extends State<home> {
-  bool isOn = true;
+  bool isOn = false;
   void toggleStatusBarColor(bool value) {
     setState(() {
       isOn = value;

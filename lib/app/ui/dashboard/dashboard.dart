@@ -4,6 +4,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:idealista/app/constant/app_color.dart';
 import 'package:idealista/app/ui/dashboard/home/home.dart';
+import 'package:idealista/app/ui/widget/custom_drawer.dart';
 import 'package:idealista/app/widget/font_constant.dart';
 
 class CurrentLocation extends StatefulWidget {
@@ -102,23 +103,30 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   int _selectedIndex = 0;
+    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final List<Widget> _pages = [
     home(),
     SizedBox.shrink(),
     SizedBox.shrink(),
-    SizedBox.shrink()
+     SizedBox.shrink(),
   ];
 
   void _onItemTapped(int index) {
-    // Navigate to the respective page for other icons
-    setState(() {
-      _selectedIndex = index;
-    });
+   if (index == 3) {
+      // Open the drawer when "My Account" is tapped
+      _scaffoldKey.currentState?.openDrawer();
+    } else {
+      // Navigate to other pages
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: AppColor.backgroundColor,
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -152,6 +160,7 @@ class _DashboardState extends State<Dashboard> {
           ),
         ],
       ),
+      drawer: CustomDrawer(scaffoldKey: _scaffoldKey),
     );
   }
 }
