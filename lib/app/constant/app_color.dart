@@ -8,5 +8,5 @@ class AppColor {
   static const Color blackColor = Colors.black;
   static const Color grey = Colors.grey;
   static const Color darkgrey = const Color.fromARGB(255, 109, 107, 107);
-  static const Color secondaryColor = Color(0XFFEEFFDD);
+  static const Color secondaryColor = Color(0XFFB6EDB9);
 }

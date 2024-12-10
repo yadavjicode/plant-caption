@@ -15,9 +15,35 @@ class CustomDrawer extends StatelessWidget {
       child: SafeArea(
         child: Column(
           children: [
-            Container(
-              child: Image.asset("assets/images/header.png"),
-            ),
+            Stack(children: [
+              Image.asset(
+                "assets/images/header.png",
+                fit: BoxFit.cover,
+              ),
+              Positioned(
+                  left: 10,
+                  bottom: 10,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Prashant Yadav",
+                        style: FontConstant.styleSemiBold(
+                            fontSize: 16, color: AppColor.whiteColor),
+                      ),
+                      Text(
+                        "+9971253602",
+                        style: FontConstant.styleRegular(
+                            fontSize: 14, color: AppColor.whiteColor),
+                      ),
+                      Text(
+                        "Member since Nov 2024",
+                        style: FontConstant.styleRegular(
+                            fontSize: 14, color: AppColor.whiteColor),
+                      )
+                    ],
+                  ))
+            ]),
             Expanded(
               child: ListView(
                 // physics: NeverScrollableScrollPhysics(),
@@ -26,64 +52,64 @@ class CustomDrawer extends StatelessWidget {
                   expansionOption("My details"),
                   GestureDetector(
                     child: buildoption(
-                        "assets/icons/booking.svg", "Dashboard", 22, 22),
+                        "assets/icons/booking.svg", "My Order", 22, 22),
                   ),
                   GestureDetector(
                     onTap: () => {},
                     child: buildoption(
-                        "assets/icons/wallet.svg", "My Profile", 20, 20),
+                        "assets/icons/myprofile.svg", "My Profile", 22, 24),
                   ),
                   expansionOption("Payments"),
                   GestureDetector(
                     onTap: () => {},
-                    child: buildoption("assets/icons/booking.svg",
+                    child: buildoption("assets/icons/wallet.svg",
                         "Plant Ropan Wallet", 22, 22),
                   ),
                   GestureDetector(
                     onTap: () {},
                     child: buildoption(
-                        "assets/icons/booking.svg", "Payment methods", 22, 22),
+                        "assets/icons/payment.svg", "Payment methods", 24, 24),
                   ),
                   expansionOption("More"),
                   GestureDetector(
                     onTap: () => {},
-                    child: buildoption(
-                        "assets/icons/booking.svg", "Offers", 22, 22),
+                    child:
+                        buildoption("assets/icons/offer.svg", "Offers", 22, 22),
                   ),
                   GestureDetector(
                     onTap: () => {},
                     child: buildoption(
-                        "assets/icons/booking.svg", "Referrals", 22, 22),
+                        "assets/icons/referrals.svg", "Referrals", 22, 22),
                   ),
                   GestureDetector(
                     onTap: () => {},
                     child: buildoption(
-                        "assets/icons/booking.svg", "Incentives", 22, 22),
+                        "assets/icons/incentives.svg", "Incentives", 22, 22),
                   ),
                   GestureDetector(
                     onTap: () => {},
-                    child: buildoption("assets/icons/booking.svg",
+                    child: buildoption("assets/icons/know.svg",
                         "Know About Plant Ropan", 22, 22),
                   ),
                   GestureDetector(
                     onTap: () => {},
                     child: buildoption(
-                        "assets/icons/booking.svg", "Rate App", 22, 22),
+                        "assets/icons/rate.svg", "Rate App", 22, 22),
                   ),
                   GestureDetector(
                     onTap: () => {},
                     child: buildoption(
-                        "assets/icons/booking.svg", "Privacy Policy", 22, 22),
+                        "assets/icons/privacy.svg", "Privacy Policy", 22, 22),
                   ),
                   GestureDetector(
                     onTap: () => {},
                     child: buildoption(
-                        "assets/icons/booking.svg", "Notifications", 22, 22),
+                        "assets/icons/notifi.svg", "Notifications", 22, 22),
                   ),
                   GestureDetector(
                     onTap: () => {},
-                    child: buildoption(
-                        "assets/icons/booking.svg", "Account Setting", 22, 22),
+                    child: buildoption("assets/icons/accountsetting.svg",
+                        "Account Setting", 22, 20),
                   ),
                   GestureDetector(
                     onTap: () => {},
@@ -111,10 +137,14 @@ Widget buildoption(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: Row(
           children: [
-            SvgPicture.asset(
-              imagepath,
-              width: width, // Set the desired width
-              height: height, // Set the desired height
+            Container(
+              width: 30,
+              alignment: Alignment.center,
+              child: SvgPicture.asset(
+                imagepath,
+                width: width, // Set the desired width
+                height: height, // Set the desired height
+              ),
             ),
             const SizedBox(
               width: 20,
@@ -142,7 +172,7 @@ Widget expansionOption(String tittle) {
     color: AppColor.backgroundColor,
     width: double.infinity,
     alignment: Alignment.centerLeft,
-    padding: const EdgeInsets.only(left: 50, top: 15, bottom: 6, right: 18),
+    padding: const EdgeInsets.only(left: 60, top: 15, bottom: 6, right: 18),
     child: Text(
       tittle,
       style: FontConstant.styleMedium(fontSize: 17, color: AppColor.blackColor),

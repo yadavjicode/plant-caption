@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:idealista/app/constant/app_color.dart';
+import 'package:idealista/app/ui/dashboard/feeds/feeds.dart';
 import 'package:idealista/app/ui/dashboard/home/home.dart';
+import 'package:idealista/app/ui/dashboard/payout/payout.dart';
 import 'package:idealista/app/ui/widget/custom_drawer.dart';
 import 'package:idealista/app/widget/font_constant.dart';
 
@@ -106,8 +108,8 @@ class _DashboardState extends State<Dashboard> {
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final List<Widget> _pages = [
     home(),
-    SizedBox.shrink(),
-    SizedBox.shrink(),
+    Feeds(),
+    Payout(),
      SizedBox.shrink(),
   ];
 
