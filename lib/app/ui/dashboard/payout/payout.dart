@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:idealista/app/constant/app_color.dart';
 import 'package:idealista/app/ui/dashboard/payout/daily/daily.dart';
+import 'package:idealista/app/ui/dashboard/payout/monthly/monthly.dart';
+import 'package:idealista/app/ui/dashboard/payout/weekly/weeekly.dart';
 import 'package:idealista/app/widget/font_constant.dart';
 
 class Payout extends StatelessWidget {
@@ -30,12 +32,8 @@ class Payout extends StatelessWidget {
             ],
           ),
         ),
-        body: const TabBarView(
-          children: [
-            Daily(),
-            Center(child: Text('Discover Content')),
-            Center(child: Text('Friends Content')),
-          ],
+        body: TabBarView(
+          children: [Daily(), weekly(), Monthly()],
         ),
       ),
     );
